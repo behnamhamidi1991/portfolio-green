@@ -1,11 +1,16 @@
 'use client';
 
 import AdminAboutView from '@/components/admin-view/about';
+import AdminContactView from '@/components/admin-view/contact';
 import AdminEducationView from '@/components/admin-view/education';
 import AdminExperienceView from '@/components/admin-view/experience';
 import AdminHomeView from '@/components/admin-view/home';
+import AdminProjectView from '@/components/admin-view/project';
+import { useState } from 'react';
 
 export default function AdminView() {
+  const [currentSelectedTab, setCurrentSelectedTab] = useState('home');
+
   const menuItems = [
     {
       id: 'home',
@@ -30,10 +35,12 @@ export default function AdminView() {
     {
       id: 'project',
       label: 'Project',
+      component: <AdminProjectView />,
     },
     {
       id: 'contact',
       label: 'Contact',
+      component: <AdminContactView />,
     },
   ];
 
@@ -45,12 +52,19 @@ export default function AdminView() {
             key={item.id}
             type="button"
             className="p-4 font-bold text-xl text-black"
+            onClick={() => {
+              setCurrentSelectedTab(item.id);
+            }}
           >
             {item.label}
           </button>
         ))}
       </nav>
-      <div className="mt-10"></div>
+      <div className="mt-10 p-10">
+        {menuItems.map(
+          (item) => item.id === currentSelectedTab && item.component
+        )}
+      </div>
     </div>
   );
 }
