@@ -8,8 +8,14 @@ import AdminHomeView from '@/components/admin-view/home';
 import AdminProjectView from '@/components/admin-view/project';
 import { useState } from 'react';
 
+const initialHomeFormData = {
+  heading: '',
+  summary: '',
+};
+
 export default function AdminView() {
   const [currentSelectedTab, setCurrentSelectedTab] = useState('home');
+  const [homeViewFormData, setHomeViewFormData] = useState('');
 
   const menuItems = [
     {
